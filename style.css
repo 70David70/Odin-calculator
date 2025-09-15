@@ -6,3 +6,39 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    width: 30vw;
+    background-color: rgba(75, 68, 62, 0.76);
+}
+
+
+#calculator-screen {
+    display: flex;
+    flex: 0 0 30%;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: rgba(27, 20, 20, 0.466);
+}
+
+/* buttons */
+
+#calculator-buttons {
+    display: flex;
+    flex: 1;
+    padding: 2%;
+    flex-wrap: wrap;
+}
+button {
+    
+    height: 25%;
+    width: 25px;
+    border: 1px solid black;
+    font-size: 1.2rem;
+    margin-bottom: 1vh;
+    margin-right: 1vh;
+}
