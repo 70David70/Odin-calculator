@@ -5,14 +5,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(15, 15, 15);
 }
 
 #container {
     display: flex;
     flex-direction: column;
     height: 70vh;
-    width: 30vw;
-    background-color: rgba(75, 68, 62, 0.76);
+    width: min(400px, 90vw);
+    background-color: #F19BA4;
+    border: 1px solid rgb(255, 255, 255)
 }
 
 
@@ -22,23 +24,34 @@ body {
     align-items: center;
     justify-content: flex-end;
     padding: 10px;
-    background-color: rgba(27, 20, 20, 0.466);
+    background-color: rgba(14, 13, 34, 0.678);
 }
 
 /* buttons */
 
 #calculator-buttons {
     display: flex;
-    flex: 1;
-    padding: 2%;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
+    padding: 5%;
+    gap: 11px;
 }
 button {
-    
-    height: 25%;
-    width: 25px;
-    border: 1px solid black;
+    height: 35%;
+    width: 22%;
+    border: 2px solid black;
     font-size: 1.2rem;
-    margin-bottom: 1vh;
-    margin-right: 1vh;
+    background-color: #9BA4F1
+}
+#calculator-buttons #calculate-btn {
+    width: 47%;
+}
+#divide-btn, #multiply-btn, #add-btn, #subtract-btn {
+    background-color: #A4F19B;
+}
+body > #container > #calculator-buttons > button:hover{
+    background-color: #000000a6;
+    color: white;
+    border: 2px solid white;
 }
