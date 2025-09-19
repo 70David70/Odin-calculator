@@ -1,4 +1,5 @@
 body {
+    font-family:'Times New Roman', Times, serif;
     height: 100vh;
     margin: 0;
 
@@ -20,8 +21,9 @@ body {
 
 #calculator-screen {
     display: flex;
+    flex-direction: column;
     flex: 0 0 30%;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-end;
     padding: 10px;
     background-color: rgba(12, 12, 24, 0.842);
@@ -56,4 +58,18 @@ button {
 body > #container > #calculator-buttons > button:hover{
     background-color: #000000a6;
     color: white;
+}
+
+
+#calculator-output, #calculator-history {
+    width: 100%;
+}
+#calculator-output {
+    color: antiquewhite;
+    margin-top: 2%;
+    font-size: 40px;
+    font-weight: 600;
+}
+#calculator-history {
+    color: rgba(250, 235, 215, 0.63);
 }

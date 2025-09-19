@@ -30,7 +30,6 @@ let input = {
 };
 let toCalculate = [];
 
-let calculatorScreen = document.querySelector("#calculator-screen");
 let buttons = document.querySelector("#calculator-buttons");
 
 buttons.addEventListener("click", (e)=> {
@@ -38,16 +37,19 @@ buttons.addEventListener("click", (e)=> {
         if (e.target.textContent >= 0) {
             input.chunk += e.target.textContent
             //updateScreen
+            updateScreen(e.target.textContent)
         }
         else if(input.chunk == "" && e.target.textContent == ".") {
             input.chunk = "0.";
             input.decimal = true;
             //updateScreen
+            updateScreen(e.target.textContent)
         }
         else {
             input.chunk += "."
             input.decimal = true;
             //updateScreen
+            updateScreen(e.target.textContent)
         }
         
     }
@@ -59,17 +61,32 @@ buttons.addEventListener("click", (e)=> {
             input.decimal = false;
         }
         toCalculate.push(e.target.textContent);
+        updateScreen(e.target.textContent)
     }
+
     else if (e.target.textContent == "DEL") {
         input.chunk.slice(0, -1)
+        updateScreen(e.target.textContent)
     }
+
     else if (e.target.textContent == "AC") {
         input.chunk = "";
         input.decimal = false;
         input.mode = "positive";
+        updateScreen(e.target.textContent)
     }
 })
 
 //to do function updateScreen()
+function updateScreen(pressedButton) {
+    let history = document.querySelector("#calculator-history")
+    let outPut = document.querySelector("#calculator-output")
+    
+    outPut.textContent = input.chunk || 0;
+
+    if (["+", "-", "X", "/"].includes(pressedButton)) {
+        outPut.textContent = toCalculate.join(" ");
+    }
+}
 
 //to do function calculate()
