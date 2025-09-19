@@ -60,10 +60,9 @@ buttons.addEventListener("click", (e)=> {
         }
         toCalculate.push(e.target.textContent);
     }
-    console.log(input.chunk)
-    console.log(e.target.textContent)
-    console.log(toCalculate)
-    
+    else if (e.target.textContent == "DEL") {
+        input.chunk.slice(0, -1)
+    }
 })
 
 //to do function updateScreen()
