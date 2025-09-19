@@ -34,7 +34,7 @@ let calculatorScreen = document.querySelector("#calculator-screen");
 let buttons = document.querySelector("#calculator-buttons");
 
 buttons.addEventListener("click", (e)=> {
-    if (e.target.textContent >= 0 || e.target.textContent == "." && input.decimal == false) {
+    if (!isNaN(parseInt(e.target.textContent)) || e.target.textContent == "." && input.decimal == false) {
         if (e.target.textContent >= 0) {
             input.chunk += e.target.textContent
             //updateScreen
@@ -51,4 +51,21 @@ buttons.addEventListener("click", (e)=> {
         }
         
     }
+    //to do event listener for the rest of the buttons
+    else if (["+", "-", "X", "/"].includes(e.target.textContent)) {
+        if (input.chunk !== "") {
+            toCalculate.push(input.chunk);
+            input.chunk = "";
+            input.decimal = false;
+        }
+        toCalculate.push(e.target.textContent);
+    }
+    console.log(input.chunk)
+    console.log(e.target.textContent)
+    console.log(toCalculate)
+    
 })
+
+//to do function updateScreen()
+
+//to do function calculate()
