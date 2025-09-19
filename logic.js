@@ -22,3 +22,8 @@
             else if x is . ; sum = sum
 
 */
+
+let input = {
+    onScreen,
+    mode, //positive, negative
+}
