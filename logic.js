@@ -63,6 +63,11 @@ buttons.addEventListener("click", (e)=> {
     else if (e.target.textContent == "DEL") {
         input.chunk.slice(0, -1)
     }
+    else if (e.target.textContent == "AC") {
+        input.chunk = "";
+        input.decimal = false;
+        input.mode = "positive";
+    }
 })
 
 //to do function updateScreen()
