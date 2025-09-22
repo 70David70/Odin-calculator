@@ -1,27 +1,3 @@
-// program logic:
-/*
-    create an object{
-        array of input numbers and operators
-        mode //number, negative, decimal
-    }
-
-    event listener for all buttons
-        if the button was a number or an operator
-            store it in the array
-            update the screen
-
-        else, check which button
-            execute it's function
-            update the screen
-
-
-    create sum function
-        using reduce on the array
-            let float(sum) = 0;
-            if the x is a number; sum * 10 + number
-            else if x is . ; sum = sum
-
-*/
 
 let input = {
     chunk: "",
@@ -31,57 +7,59 @@ let input = {
 };
 let toCalculate = [];
 
-let buttons = document.querySelector("#calculator-buttons");
 
+let buttons = document.querySelector("#calculator-buttons");
 buttons.addEventListener("click", (e)=> {
     if ((!isNaN(parseInt(e.target.textContent)) || e.target.textContent == "." && input.decimal == false) && input.count != 18) {
         if (e.target.textContent >= 0) {
             input.chunk += e.target.textContent;
             input.count++;
             //updateScreen
-            updateScreen(e.target.textContent)
+            updateScreen()
         }
         else if(input.chunk == "" && e.target.textContent == ".") {
             input.chunk = "0.";
             input.decimal = true;
             input.count++;
             //updateScreen
-            updateScreen(e.target.textContent)
+            updateScreen()
         }
         else {
             input.chunk += "."
             input.decimal = true;
             //updateScreen
-            updateScreen(e.target.textContent)
+            updateScreen()
         }
         
     }
-    //to do event listener for the rest of the buttons
+
     else if (["+", "-", "X", "/"].includes(e.target.textContent)) {
         if (input.chunk !== "") {
             toCalculate.push(input.chunk);
             input.chunk = "";
             input.decimal = false;
-            toCalculate.push(e.target.textContent);
+            if (e.target.textContent == "X") {
+                toCalculate.push("*");    
+            }
+            else toCalculate.push(e.target.textContent);
         }
-        updateScreen(e.target.textContent)
+        updateScreen("x")
     }
+
 
     else if (e.target.textContent == "DEL") {
         input.chunk = input.chunk.slice(0, -1);
         input.count--;
-        updateScreen(e.target.textContent)
+        updateScreen()
     }
-
     else if (e.target.textContent == "AC") {
         input.chunk = "";
         input.decimal = false;
         input.mode = "positive";
         toCalculate = [];
         input.count = 0;
-        updateScreen(e.target.textContent)
+        updateScreen()
     }
-
     else if (e.target.textContent =="-/+") {
         if (input.mode == "positive"){
             input.chunk = "-" + input.chunk;
@@ -91,12 +69,25 @@ buttons.addEventListener("click", (e)=> {
             input.chunk = input.chunk.slice(1, input.chunk.length);
             input.mode = "positive";
         }
-        updateScreen("-/+")
+        updateScreen()
+    }
+
+    else if (e.target.textContent == "=") {
+        if (input.chunk !== "") {
+            toCalculate.push(input.chunk);
+            input.chunk = "";
+            input.decimal = false;
+            toCalculate.push(e.target.textContent);
+        }
+        let result = calculate();
+        toCalculate = [];
+        input.chunk = result
+        updateScreen(result)
     }
 })
 
 //to do function updateScreen()
-function updateScreen(pressedButton) {
+function updateScreen(show = "optional") {
     let history = document.querySelector("#calculator-history")
     let outPut = document.querySelector("#calculator-output")
     
@@ -106,3 +97,34 @@ function updateScreen(pressedButton) {
 }
 
 //to do function calculate()
+function calculate() {
+
+    let result = 0
+    let process = [...toCalculate];
+    length = toCalculate.length;
+
+    for (let i = 0; i < length; i++) {
+        if (process[i] == "*") {
+            process.splice((i - 1), 3, `${parseFloat(process[i - 1]) * parseFloat(process[i + 1])}`)
+            length = process.length
+        }
+        else if (process[i] == "/") {
+            process.splice((i - 1), 3, `${parseFloat(process[i - 1]) / parseFloat(process[i + 1])}`)
+            length = process.length
+        }
+    }
+    for (let i = 0; i < length; i++) {
+        if (process[i] == "+") {
+            process.splice((i - 1), 3, `${parseFloat(process[i - 1]) + parseFloat(process[i + 1])}`)
+            length = process.length
+        }
+        else if (process[i] == "-") {
+            process.splice((i - 1), 3, `${parseFloat(process[i - 1]) - parseFloat(process[i + 1])}`)
+            length = process.length
+        }
+    }
+
+    result = parseFloat(process[0]);
+    return result;
+
+}
