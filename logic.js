@@ -81,6 +81,18 @@ buttons.addEventListener("click", (e)=> {
         input.count = 0;
         updateScreen(e.target.textContent)
     }
+
+    else if (e.target.textContent =="-/+") {
+        if (input.mode == "positive"){
+            input.chunk = "-" + input.chunk;
+            input.mode = "negative";
+        }
+        else {
+            input.chunk = input.chunk.slice(1, input.chunk.length);
+            input.mode = "positive";
+        }
+        updateScreen("-/+")
+    }
 })
 
 //to do function updateScreen()
