@@ -27,21 +27,24 @@ let input = {
     chunk: "",
     decimal: false,
     mode: "positive", //positive, negative
+    count: 0,
 };
 let toCalculate = [];
 
 let buttons = document.querySelector("#calculator-buttons");
 
 buttons.addEventListener("click", (e)=> {
-    if (!isNaN(parseInt(e.target.textContent)) || e.target.textContent == "." && input.decimal == false) {
+    if ((!isNaN(parseInt(e.target.textContent)) || e.target.textContent == "." && input.decimal == false) && input.count != 18) {
         if (e.target.textContent >= 0) {
-            input.chunk += e.target.textContent
+            input.chunk += e.target.textContent;
+            input.count++;
             //updateScreen
             updateScreen(e.target.textContent)
         }
         else if(input.chunk == "" && e.target.textContent == ".") {
             input.chunk = "0.";
             input.decimal = true;
+            input.count++;
             //updateScreen
             updateScreen(e.target.textContent)
         }
@@ -59,13 +62,14 @@ buttons.addEventListener("click", (e)=> {
             toCalculate.push(input.chunk);
             input.chunk = "";
             input.decimal = false;
+            toCalculate.push(e.target.textContent);
         }
-        toCalculate.push(e.target.textContent);
         updateScreen(e.target.textContent)
     }
 
     else if (e.target.textContent == "DEL") {
-        input.chunk.slice(0, -1)
+        input.chunk = input.chunk.slice(0, -1);
+        input.count--;
         updateScreen(e.target.textContent)
     }
 
@@ -73,6 +77,8 @@ buttons.addEventListener("click", (e)=> {
         input.chunk = "";
         input.decimal = false;
         input.mode = "positive";
+        toCalculate = [];
+        input.count = 0;
         updateScreen(e.target.textContent)
     }
 })
@@ -83,10 +89,8 @@ function updateScreen(pressedButton) {
     let outPut = document.querySelector("#calculator-output")
     
     outPut.textContent = input.chunk || 0;
+    history.textContent = toCalculate.join(" ");
 
-    if (["+", "-", "X", "/"].includes(pressedButton)) {
-        outPut.textContent = toCalculate.join(" ");
-    }
 }
 
 //to do function calculate()
