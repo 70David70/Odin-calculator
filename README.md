@@ -1,1 +1,2 @@
-# Odin-calculator
+# JavaScript Calculator
+Built a responsive web app handling user input, state management, and dynamic DOM updates. Implemented error handling for invalid input (e.g., string/number mismatches) and improved UI responsiveness with event delegation.
