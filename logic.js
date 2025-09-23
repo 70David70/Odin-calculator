@@ -10,7 +10,7 @@ let toCalculate = [];
 
 let buttons = document.querySelector("#calculator-buttons");
 buttons.addEventListener("click", (e)=> {
-    if ((!isNaN(parseInt(e.target.textContent)) || e.target.textContent == "." && input.decimal == false) && input.count != 18) {
+    if ((!isNaN(parseInt(e.target.textContent)) || e.target.textContent == "." && input.decimal == false) && input.count != 16) {
         if (e.target.textContent >= 0) {
             input.chunk += e.target.textContent;
             input.count++;
@@ -48,7 +48,7 @@ buttons.addEventListener("click", (e)=> {
 
 
     else if (e.target.textContent == "DEL") {
-        input.chunk = input.chunk.slice(0, -1);
+        input.chunk = input.chunk.toString().slice(0, -1);
         input.count--;
         updateScreen()
     }
