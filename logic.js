@@ -109,6 +109,9 @@ function calculate() {
             length = process.length
         }
         else if (process[i] == "/") {
+            if (process[i + 1] == 0) {
+                return "undefined";
+            }
             process.splice((i - 1), 3, `${parseFloat(process[i - 1]) / parseFloat(process[i + 1])}`)
             length = process.length
         }
